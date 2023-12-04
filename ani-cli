@@ -83,7 +83,7 @@ version_info() {
 }
 
 update_script() {
-    update="$(curl -s -A "$agent" "https://github.com/candrapersada/ani-cli-yt-dlp/master/ani-cli")" || die "Connection error"
+    update="$(curl -s -A "$agent" "https://raw.githubusercontent.com/candrapersada/ani-cli-yt-dlp/master/ani-cli")" || die "Connection error"
     update="$(printf '%s\n' "$update" | diff -u "$0" -)"
     if [ -z "$update" ]; then
         printf "Script is up to date :)\n"
