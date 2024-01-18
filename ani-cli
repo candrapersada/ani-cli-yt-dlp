@@ -234,7 +234,7 @@ download() {
             elif command -v "N_m3u8DL-RE" >/dev/null; then
                 N_m3u8DL-RE --log-level ERROR --thread-count 16 --download-retry-count 999 "$1" --tmp-dir "${HOME}/yt-dlp_temp" --save-dir "$download_dir" --save-name "$2"
             elif command -v "yt-dlp" >/dev/null; then
-                yt-dlp "$1" --no-skip-unavailable-fragments --fragment-retries infinite -N 3 -o "$download_dir/$2.mp4"
+                yt-dlp "$1" --no-skip-unavailable-fragments --fragment-retries infinite -N 4 -o "$download_dir/$2.mp4"
             else
                 ffmpeg -loglevel error -stats -i "$1" -c copy "$download_dir/$2.mp4"
             fi
