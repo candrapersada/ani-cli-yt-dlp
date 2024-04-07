@@ -264,7 +264,11 @@ download() {
             fi
             ;;
         *)
-            aria2c --enable-rpc=false --check-certificate=false --continue --summary-interval=0 -x 16 -s 16 "$1" --dir="$download_dir" -o "$2.mp4" --download-result=hide
+            if command -v "yt-dlp" >/dev/null; then
+                yt-dlp "$1" --no-skip-unavailable-fragments --fragment-retries infinite -N 4 --downloader aria2c -o "$download_dir/$2.mp4"
+            else
+                aria2c --enable-rpc=false --check-certificate=false --continue --summary-interval=0 -x 16 -s 16 "$1" --dir="$download_dir" -o "$2.mp4" --download-result=hide
+            fi
             ;;
     esac
 }
